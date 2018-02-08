@@ -22,8 +22,10 @@ body, .app {
 }
 
 .list-books-content {
-  padding: 0 0 80px;
-  flex: 1;
+  display: flex;
+  padding: 14px 24px 24px;
+  margin: 0 auto;
+  flex-wrap: wrap;
 }
 
 .bookshelf {

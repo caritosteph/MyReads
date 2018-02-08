@@ -1,19 +1,17 @@
 import React from 'react';
-import * as BooksAPI from './BooksAPI';
 import './App.css';
-import RaisedButton from 'material-ui/RaisedButton';
+import BookList from './BookList/BookList';
 
 class BooksApp extends React.Component {
 
   render() {
     return (
       <div className="app">
-        BookApp
-        <RaisedButton type='submit' label='Submit' primary />
-
+        <BookList />
       </div>
     )
   }
+
 }
 
-export default BooksApp
+export default BooksApp;
