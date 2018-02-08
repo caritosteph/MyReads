@@ -16,30 +16,74 @@ const styles = {
   }
 };
 
-
 class BookList extends Component {
 
   state = {
-    bookList: []
+    currentlyReading: [],
+    wantToRead: [],
+    read: []
   }
 
   componentDidMount() {
     BooksAPI.getAll()
       .then( bookList => {
           console.log("bookList: ", bookList);
-          this.setState({bookList});
+          this.setState(state => ({
+            currentlyReading: bookList.filter(book => book.shelf === "currentlyReading"),
+            wantToRead: bookList.filter(book => book.shelf === "wantToRead"),
+            read: bookList.filter(book => book.shelf === "read")
+          }));
     });
   }
 
   render(){
-    let {bookList} = this.state;
+    let {currentlyReading, wantToRead, read} = this.state;
+
     return (
-      <div className="list-books-content">
-        <GridList style={styles.gridList} padding={50} >
-          {bookList.map((book) => (
-            <Book key={book.id} book={book}/>
-          ))}
-        </GridList>
+      <div>
+        {
+          currentlyReading.length > 0 && (
+            <div>
+              <h3>Currently Reading</h3>
+              <div style={styles.root}>
+                <GridList style={styles.gridList} padding={50}>
+                  {currentlyReading.map((book) => (
+                    <Book key={book.id} book={book}/>
+                  ))}
+                </GridList>
+              </div>
+            </div>
+
+          )
+        }
+        {
+          wantToRead.length > 0 && (
+            <div>
+              <h3>Want to Read</h3>
+              <div style={styles.root}>
+                <GridList style={styles.gridList} padding={50}>
+                  {wantToRead.map( book => (
+                    <Book key={book.id} book={book}/>
+                  ))}
+                </GridList>
+              </div>
+            </div>
+          )
+        }
+        {
+          read.length > 0 && (
+            <div>
+              <h3>Read</h3>
+              <div style={styles.root}>
+                <GridList style={styles.gridList} padding={50}>
+                  {read.map((book) => (
+                    <Book key={book.id} book={book}/>
+                  ))}
+                </GridList>
+              </div>
+            </div>
+          )
+        }
       </div>
     );
   }
