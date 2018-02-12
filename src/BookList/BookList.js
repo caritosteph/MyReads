@@ -28,21 +28,31 @@ class BookList extends Component {
     BooksAPI.getAll()
       .then( bookList => {
         console.log("bookList:", bookList);
-          this.setState(state => ({
+
+          this.setState({
             currentlyReading: bookList.filter(book => book.shelf === "currentlyReading"),
             wantToRead: bookList.filter(book => book.shelf === "wantToRead"),
             read: bookList.filter(book => book.shelf === "read")
-          }));
+          });
     });
   }
 
   updateBookShelf = (book, self) => {
-    console.log(" before  addCurrentlyReading: ", book)
-
     BooksAPI.update(book, self)
       .then( result => {
-        console.log("addCurrentlyReading: ", result)
+        console.log("update: ", result)
+
+        this.setState(state => ({
+          currentlyReading: state.currentlyReading.filter(book => result.currentlyReading.indexOf(book.id)>=0),
+          wantToRead: state.wantToRead.filter(book => result.wantToRead.indexOf(book.id)>=0),
+          read: state.read.filter(book => result.read.indexOf(book.id)>=0)
+        }));
+
       });
+
+      console.log("updateCurrently: ", this.state.currentlyReading);
+      console.log("wantToRead: ", this.state.wantToRead);
+      console.log("read: ", this.state.read);
   }
 
 

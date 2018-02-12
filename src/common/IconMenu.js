@@ -16,7 +16,6 @@ class IconMenu extends Component {
 
     handleClose = (e, value) => {
       console.log("ev: ", event.target.value);
-      console.log("value: ", value);
       this.setState({ anchorEl: null });
       console.log("this.props.updateBookShelf: ", this.props.updateBookShelf(this.props.book, value));
     };
@@ -59,7 +58,8 @@ class IconMenu extends Component {
               value="read">
               Read
             </MenuItem>
-            <MenuItem onClick={this.handleClose}>
+            <MenuItem
+              onClick={(e) => this.handleClose(e, "none")}>
               None
             </MenuItem>
         </Menu>
