@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
-import { GridList } from 'material-ui/GridList';
+import { withStyles } from 'material-ui/styles';
+import Paper from 'material-ui/Paper';
+import Grid from 'material-ui/Grid';
 import * as BooksAPI from '../BooksAPI';
 import Book from './Book';
 
-
-const styles = {
-  root: {
-    margin: '0 auto',
-    display: 'flex',
-    flexWrap: 'wrap'
-  },
-  gridList: {
-    display: 'flex',
-    flexWrap: 'nowrap'
-  }
-};
+const styles = theme => ({
+    root: {
+      flexGrow: 1,
+      marginTop: 30,
+    },
+    paper: {
+      padding: 16,
+      textAlign: 'center',
+      color: theme.palette.text.secondary,
+    }
+  }) ;
 
 class BookList extends Component {
-
   state = {
     currentlyReading: [],
     wantToRead: [],
@@ -36,57 +36,38 @@ class BookList extends Component {
     });
   }
 
-  render(){
-    let {currentlyReading, wantToRead, read} = this.state;
+  render() {
+
+    const { currentlyReading, wantToRead, read } = this.state;
+    const { classes } = this.props;
 
     return (
-      <div>
-        {
-          currentlyReading.length > 0 && (
-            <div>
-              <h3>Currently Reading</h3>
-              <div style={styles.root}>
-                <GridList style={styles.gridList} padding={50}>
-                  {currentlyReading.map((book) => (
-                    <Book key={book.id} book={book}/>
-                  ))}
-                </GridList>
-              </div>
-            </div>
+      <div className={classes.root}>
+        <Grid container spacing={24}>
+          <Grid item xs={12}>
+            <Paper className={classes.paper}>Currently Reading</Paper>
+          </Grid>
+            {currentlyReading.map((book) => (
+              <Book key={book.id} book={book}/>
+            ))}
 
-          )
-        }
-        {
-          wantToRead.length > 0 && (
-            <div>
-              <h3>Want to Read</h3>
-              <div style={styles.root}>
-                <GridList style={styles.gridList} padding={50}>
-                  {wantToRead.map( book => (
-                    <Book key={book.id} book={book}/>
-                  ))}
-                </GridList>
-              </div>
-            </div>
-          )
-        }
-        {
-          read.length > 0 && (
-            <div>
-              <h3>Read</h3>
-              <div style={styles.root}>
-                <GridList style={styles.gridList} padding={50}>
-                  {read.map((book) => (
-                    <Book key={book.id} book={book}/>
-                  ))}
-                </GridList>
-              </div>
-            </div>
-          )
-        }
+          <Grid item xs={12}>
+            <Paper className={classes.paper}>Want to Read</Paper>
+          </Grid>
+          {wantToRead.map((book) => (
+            <Book key={book.id} book={book}/>
+          ))}
+          <Grid item xs={12}>
+            <Paper className={classes.paper}>Read</Paper>
+          </Grid>
+          {read.map((book) => (
+            <Book key={book.id} book={book}/>
+          ))}
+        </Grid>
       </div>
     );
   }
+
 }
 
-export default BookList;
+export default  withStyles(styles)(BookList);

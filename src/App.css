@@ -1,14 +1,10 @@
-html, body, .root {
+/* html, body, .root {
   height: 100%;
-}
-body {
-  line-height: 1.5;
 }
 body, .app {
   background: white;
 }
 
-/* main page */
 
 .list-books-title {
   padding: 10px 0;
@@ -64,8 +60,6 @@ body, .app {
   font-size: 0;
 }
 
-/* search page */
-
 .search-books-bar {
   position: fixed;
   width: 100%;
@@ -105,7 +99,6 @@ body, .app {
   padding: 80px 10px 20px;
 }
 
-/* books grid */
 
 .books-grid {
   list-style-type: none;
@@ -163,7 +156,6 @@ body, .app {
   cursor: pointer;
 }
 
-/* book cover */
 
 .book-cover {
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
@@ -174,3 +166,4 @@ body, .app {
   text-align: center;
   font-size: 0.8em;
 }
+*/
