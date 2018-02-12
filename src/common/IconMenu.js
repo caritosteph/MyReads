@@ -14,8 +14,11 @@ class IconMenu extends Component {
       this.setState({ anchorEl: event.currentTarget });
     };
 
-    handleClose = () => {
+    handleClose = (e, value) => {
+      console.log("ev: ", event.target.value);
+      console.log("value: ", value);
       this.setState({ anchorEl: null });
+      console.log("this.props.updateBookShelf: ", this.props.updateBookShelf(this.props.book, value));
     };
 
   render() {
@@ -38,16 +41,22 @@ class IconMenu extends Component {
               width: 200,
             },
           }}>
-            <MenuItem selected={selected === "currentlyReading"}
-              onClick={this.handleClose}>
+            <MenuItem
+              selected={selected === "currentlyReading"}
+              onClick={(e) => this.handleClose(e, "currentlyReading")}
+              value="currentlyReading">
               Currently Reading
             </MenuItem>
-            <MenuItem selected={selected === "wantToRead"}
-              onClick={this.handleClose}>
+            <MenuItem
+              selected={selected === "wantToRead"}
+              onClick={(e) => this.handleClose(e, "wantToRead")}
+              value="wantToRead">
               Want to Read
             </MenuItem>
-            <MenuItem selected={selected === "read"}
-              onClick={this.handleClose}>
+            <MenuItem
+              selected={selected === "read"}
+              onClick={(e) => this.handleClose(e, "read")}
+              value="read">
               Read
             </MenuItem>
             <MenuItem onClick={this.handleClose}>

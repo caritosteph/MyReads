@@ -23,16 +23,6 @@ const styles = theme => ({
     display: 'flex',
     justifyContent: 'space-between'
   },
-  expand: {
-    transform: 'rotate(0deg)',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
-    marginLeft: 'auto',
-  },
-  expandOpen: {
-    transform: 'rotate(180deg)',
-  },
   avatar: {
     backgroundColor: red[500],
   },
@@ -41,7 +31,9 @@ const styles = theme => ({
 class Book extends React.Component {
 
   render() {
-    const { classes } = this.props;
+    const { classes, updateBookShelf } = this.props;
+
+    console.log("this.props 123: ", updateBookShelf)
 
     return (
       <Grid item xs={3}>
@@ -52,7 +44,7 @@ class Book extends React.Component {
                 R
               </Avatar>
             }
-            action={<IconMenu selected={this.props.book.shelf}/>}
+            action={<IconMenu selected={this.props.book.shelf} updateBookShelf={updateBookShelf} book={this.props.book}/>}
             title={this.props.book.title}
           />
           <CardMedia

@@ -27,7 +27,7 @@ class BookList extends Component {
   componentDidMount() {
     BooksAPI.getAll()
       .then( bookList => {
-          console.log("bookList: ", bookList);
+        console.log("bookList:", bookList);
           this.setState(state => ({
             currentlyReading: bookList.filter(book => book.shelf === "currentlyReading"),
             wantToRead: bookList.filter(book => book.shelf === "wantToRead"),
@@ -35,6 +35,16 @@ class BookList extends Component {
           }));
     });
   }
+
+  updateBookShelf = (book, self) => {
+    console.log(" before  addCurrentlyReading: ", book)
+
+    BooksAPI.update(book, self)
+      .then( result => {
+        console.log("addCurrentlyReading: ", result)
+      });
+  }
+
 
   render() {
 
@@ -48,20 +58,29 @@ class BookList extends Component {
             <Paper className={classes.paper}>Currently Reading</Paper>
           </Grid>
             {currentlyReading.map((book) => (
-              <Book key={book.id} book={book}/>
+              <Book
+                key={book.id}
+                book={book}
+                updateBookShelf={this.updateBookShelf}/>
             ))}
 
           <Grid item xs={12}>
             <Paper className={classes.paper}>Want to Read</Paper>
           </Grid>
           {wantToRead.map((book) => (
-            <Book key={book.id} book={book}/>
+            <Book
+              key={book.id}
+              book={book}
+              updateBookShelf={this.updateBookShelf}/>
           ))}
           <Grid item xs={12}>
             <Paper className={classes.paper}>Read</Paper>
           </Grid>
           {read.map((book) => (
-            <Book key={book.id} book={book}/>
+            <Book key={book.id} book={book}
+              key={book.id}
+              book={book}
+              updateBookShelf={this.updateBookShelf}/>
           ))}
         </Grid>
       </div>
