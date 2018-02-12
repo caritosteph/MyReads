@@ -13,7 +13,7 @@ const styles = theme => ({
     paper: {
       padding: 16,
       textAlign: 'center',
-      color: theme.palette.text.secondary,
+      color: 'rgb(36, 72, 159)',
     }
   }) ;
 
