@@ -4,6 +4,10 @@ import BookList from './BookList/BookList';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
+import IconButton from 'material-ui/IconButton';
+import { withStyles } from 'material-ui/styles';
+import Search from 'material-ui-icons/Search';
+import { Link } from 'react-router-dom';
 
 const styles = {
   root: {
@@ -12,19 +16,31 @@ const styles = {
   paper: {
     padding: 16,
     textAlign: 'center'
+  },
+  flex: {
+    flex: 1
   }
 };
 
 class BooksApp extends React.Component {
 
   render() {
+
+    const { classes } = this.props;
+
     return (
-      <div className={styles.root}>
+      <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            <Typography variant="title" color="inherit">
+            <Typography variant="title" color="inherit" className={classes.flex}>
               My Reads
             </Typography>
+            <Link to="/search">
+              <IconButton  color="initial" aria-label="Search">
+                <Search />
+              </IconButton>
+            </Link>
+
           </Toolbar>
         </AppBar>
         <BookList />
@@ -36,4 +52,4 @@ class BooksApp extends React.Component {
   }
 }
 
-export default BooksApp;
+export default withStyles(styles)(BooksApp);

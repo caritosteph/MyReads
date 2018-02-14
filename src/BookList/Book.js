@@ -31,9 +31,7 @@ const styles = theme => ({
 class Book extends React.Component {
 
   render() {
-    const { classes, updateBookShelf } = this.props;
-
-    console.log("this.props 123: ", updateBookShelf)
+    const { classes, updateBookShelf, book } = this.props;
 
     return (
       <Grid item xs={3}>
@@ -44,19 +42,19 @@ class Book extends React.Component {
                 R
               </Avatar>
             }
-            action={<IconMenu selected={this.props.book.shelf} updateBookShelf={updateBookShelf} book={this.props.book}/>}
-            title={this.props.book.title}
+            action={<IconMenu updateBookShelf={updateBookShelf} book={book}/>}
+            title={book.title}
           />
           <CardMedia
             className={classes.media}
-            image={this.props.book.imageLinks.thumbnail}
+            image={book.imageLinks.thumbnail}
           />
           <CardContent>
             <Typography component="p">
-              <strong>Author(s):</strong> {this.props.book.authors.join(", ")}
+              <strong>Author(s):</strong> {book.authors.join(", ")}
             </Typography>
             <Typography component="p">
-              <strong>Category:</strong> {this.props.book.categories ? this.props.book.categories : "General"}
+              <strong>Category:</strong> {book.categories ? book.categories : "General"}
             </Typography>
           </CardContent>
           <CardActions className={classes.actions} disableActionSpacing>

@@ -27,8 +27,6 @@ class BookList extends Component {
   componentDidMount() {
     BooksAPI.getAll()
       .then( bookList => {
-        console.log("bookList:", bookList);
-
           this.setState({
             currentlyReading: bookList.filter(book => book.shelf === "currentlyReading"),
             wantToRead: bookList.filter(book => book.shelf === "wantToRead"),
@@ -40,19 +38,13 @@ class BookList extends Component {
   updateBookShelf = (book, self) => {
     BooksAPI.update(book, self)
       .then( result => {
-        console.log("update: ", result)
-
+        console.log("Result update: ", result);
         this.setState(state => ({
           currentlyReading: state.currentlyReading.filter(book => result.currentlyReading.indexOf(book.id)>=0),
-          wantToRead: state.wantToRead.filter(book => result.wantToRead.indexOf(book.id)>=0),
-          read: state.read.filter(book => result.read.indexOf(book.id)>=0)
+          //wantToRead: state.wantToRead.filter(book => result.wantToRead.indexOf(book.id)>=0),
+          //read: state.read.filter(book => result.read.indexOf(book.id)>=0)
         }));
-
       });
-
-      console.log("updateCurrently: ", this.state.currentlyReading);
-      console.log("wantToRead: ", this.state.wantToRead);
-      console.log("read: ", this.state.read);
   }
 
 
@@ -60,6 +52,8 @@ class BookList extends Component {
 
     const { currentlyReading, wantToRead, read } = this.state;
     const { classes } = this.props;
+
+    console.log("updateCurrently: ", currentlyReading);
 
     return (
       <div className={classes.root}>
@@ -73,7 +67,6 @@ class BookList extends Component {
                 book={book}
                 updateBookShelf={this.updateBookShelf}/>
             ))}
-
           <Grid item xs={12}>
             <Paper className={classes.paper}>Want to Read</Paper>
           </Grid>
@@ -87,7 +80,7 @@ class BookList extends Component {
             <Paper className={classes.paper}>Read</Paper>
           </Grid>
           {read.map((book) => (
-            <Book key={book.id} book={book}
+            <Book 
               key={book.id}
               book={book}
               updateBookShelf={this.updateBookShelf}/>
@@ -96,7 +89,6 @@ class BookList extends Component {
       </div>
     );
   }
-
 }
 
 export default  withStyles(styles)(BookList);

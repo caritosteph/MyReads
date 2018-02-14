@@ -10,18 +10,19 @@ class IconMenu extends Component {
       anchorEl: null,
     };
 
-    handleClick = event => {
+    handleClick = e => {
+      e.preventDefault();
       this.setState({ anchorEl: event.currentTarget });
     };
 
     handleClose = (e, value) => {
-      console.log("ev: ", event.target.value);
+      e.preventDefault();
       this.setState({ anchorEl: null });
       console.log("this.props.updateBookShelf: ", this.props.updateBookShelf(this.props.book, value));
     };
 
   render() {
-    const { selected } = this.props;
+    const { book } = this.props;
     const { anchorEl } = this.state;
 
     return (
@@ -41,19 +42,19 @@ class IconMenu extends Component {
             },
           }}>
             <MenuItem
-              selected={selected === "currentlyReading"}
+              selected={book.self === "currentlyReading"}
               onClick={(e) => this.handleClose(e, "currentlyReading")}
               value="currentlyReading">
               Currently Reading
             </MenuItem>
             <MenuItem
-              selected={selected === "wantToRead"}
+              selected={book.self === "wantToRead"}
               onClick={(e) => this.handleClose(e, "wantToRead")}
               value="wantToRead">
               Want to Read
             </MenuItem>
             <MenuItem
-              selected={selected === "read"}
+              selected={book.self === "read"}
               onClick={(e) => this.handleClose(e, "read")}
               value="read">
               Read
