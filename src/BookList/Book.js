@@ -51,7 +51,7 @@ class Book extends React.Component {
           />
           <CardContent>
             <Typography component="p">
-              <strong>Author(s):</strong> {book.authors.join(", ")}
+              <strong>Author(s):</strong> { book.authors ? book.authors.join(", ") : book.authors}
             </Typography>
             <Typography component="p">
               <strong>Category:</strong> {book.categories ? book.categories : "General"}

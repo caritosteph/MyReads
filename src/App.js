@@ -19,6 +19,9 @@ const styles = {
   },
   flex: {
     flex: 1
+  },
+  searchIcon: {
+    color: '#fff'
   }
 };
 
@@ -36,11 +39,10 @@ class BooksApp extends React.Component {
               My Reads
             </Typography>
             <Link to="/search">
-              <IconButton  color="initial" aria-label="Search">
-                <Search />
+              <IconButton  className={classes.searchIcon} aria-label="Search">
+                 <Search />
               </IconButton>
             </Link>
-
           </Toolbar>
         </AppBar>
         <BookList />
