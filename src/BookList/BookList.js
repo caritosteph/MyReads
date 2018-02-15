@@ -19,6 +19,7 @@ const styles = theme => ({
 
 class BookList extends Component {
   state = {
+    bookList: [],
     currentlyReading: [],
     wantToRead: [],
     read: []
@@ -28,6 +29,7 @@ class BookList extends Component {
     BooksAPI.getAll()
       .then( bookList => {
           this.setState({
+            bookList: bookList,
             currentlyReading: bookList.filter(book => book.shelf === "currentlyReading"),
             wantToRead: bookList.filter(book => book.shelf === "wantToRead"),
             read: bookList.filter(book => book.shelf === "read")
@@ -40,9 +42,9 @@ class BookList extends Component {
       .then( result => {
         console.log("Result update: ", result);
         this.setState(state => ({
-          currentlyReading: state.currentlyReading.filter(book => result.currentlyReading.indexOf(book.id)>=0),
-          //wantToRead: state.wantToRead.filter(book => result.wantToRead.indexOf(book.id)>=0),
-          //read: state.read.filter(book => result.read.indexOf(book.id)>=0)
+          currentlyReading: state.bookList.filter(book => result.currentlyReading.indexOf(book.id)>=0),
+          wantToRead: state.bookList.filter(book => result.wantToRead.indexOf(book.id)>=0),
+          read: state.bookList.filter(book => result.read.indexOf(book.id)>=0)
         }));
       });
   }
@@ -80,7 +82,7 @@ class BookList extends Component {
             <Paper className={classes.paper}>Read</Paper>
           </Grid>
           {read.map((book) => (
-            <Book 
+            <Book
               key={book.id}
               book={book}
               updateBookShelf={this.updateBookShelf}/>

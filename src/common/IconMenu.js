@@ -10,21 +10,29 @@ class IconMenu extends Component {
       anchorEl: null,
     };
 
-    handleClick = e => {
+    handleClick = (e) => {
       e.preventDefault();
       this.setState({ anchorEl: event.currentTarget });
     };
 
-    handleClose = (e, value) => {
-      e.preventDefault();
+    handleClose = () => {
       this.setState({ anchorEl: null });
+    };
+
+    selectShelf = (e, value) => {
+      e.preventDefault();
+      //this.setState({ anchorEl: event.currentTarget });
       console.log("this.props.updateBookShelf: ", this.props.updateBookShelf(this.props.book, value));
+      console.log("selectShelf");
+      this.setState({ anchorEl: null });
+
     };
 
   render() {
     const { book } = this.props;
     const { anchorEl } = this.state;
 
+  //  console.log("icon menu: ", book);
     return (
       <div>
         <IconButton onClick={this.handleClick}>
@@ -42,25 +50,26 @@ class IconMenu extends Component {
             },
           }}>
             <MenuItem
-              selected={book.self === "currentlyReading"}
-              onClick={(e) => this.handleClose(e, "currentlyReading")}
+              selected={book.shelf === "currentlyReading"}
+              onClick={(e) => this.selectShelf(e, "currentlyReading")}
               value="currentlyReading">
               Currently Reading
             </MenuItem>
             <MenuItem
-              selected={book.self === "wantToRead"}
-              onClick={(e) => this.handleClose(e, "wantToRead")}
+              selected={book.shelf === "wantToRead"}
+              onClick={(e) => this.selectShelf(e, "wantToRead")}
               value="wantToRead">
               Want to Read
             </MenuItem>
             <MenuItem
-              selected={book.self === "read"}
-              onClick={(e) => this.handleClose(e, "read")}
+              selected={book.shelf && book.shelf === "read"}
+              onClick={(e) => this.selectShelf(e, "read")}
               value="read">
               Read
             </MenuItem>
             <MenuItem
-              onClick={(e) => this.handleClose(e, "none")}>
+              selected={!book.shelf}
+              onClick={(e) => this.selectShelf(e, "none")}>
               None
             </MenuItem>
         </Menu>
