@@ -3,7 +3,7 @@ import MoreVertIcon from 'material-ui-icons/MoreVert';
 import Menu, { MenuItem } from 'material-ui/Menu';
 import IconButton from 'material-ui/IconButton';
 
-//const ITEM_HEIGHT = 48;
+const ITEM_HEIGHT = 50;
 
 class IconMenu extends Component {
     state = {
@@ -18,9 +18,10 @@ class IconMenu extends Component {
       this.setState({ anchorEl: null });
     };
 
-    selectShelf = (event, value) => {
+    selectShelf = (e, value) => {
       this.props.updateBookShelf(this.props.book, value);
       this.setState({ anchorEl: null });
+
     };
 
   render() {
@@ -43,8 +44,8 @@ class IconMenu extends Component {
           onClose={this.handleClose}
           PaperProps={{
             style: {
-            //  maxHeight: ITEM_HEIGHT * 4.5,
-            //  width: 200,
+              maxHeight: ITEM_HEIGHT * 4.5,
+              width: 200,
             },
           }}>
             <MenuItem

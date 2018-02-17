@@ -72,7 +72,7 @@ class BookSearch extends Component {
 
     const { classes } = this.props;
     const { listBooks } = this.state;
-    console.log("listBooks hi: ", listBooks);
+    console.log("listBooks: ", listBooks);
 
     return (
       <div className={classes.root}>

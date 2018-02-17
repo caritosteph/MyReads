@@ -1,57 +1,38 @@
 import React from 'react';
-import './App.css';
-import BookList from './BookList/BookList';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
-import { withStyles } from 'material-ui/styles';
 import Search from 'material-ui-icons/Search';
+import Icon from 'material-ui/Icon';
 import { Link } from 'react-router-dom';
-
-const styles = {
-  root: {
-    width: '100%'
-  },
-  paper: {
-    padding: 16,
-    textAlign: 'center'
-  },
-  flex: {
-    flex: 1
-  },
-  searchIcon: {
-    color: '#fff'
-  }
-};
+import BookList from './BookList/BookList';
 
 class BooksApp extends React.Component {
 
   render() {
 
-    const { classes } = this.props;
-
     return (
-      <div className={classes.root}>
+      <div className="navbar-books">
         <AppBar position="static">
           <Toolbar>
-            <Typography variant="title" color="inherit" className={classes.flex}>
+            <Typography variant="title" color="inherit" className="flex-typography">
               My Reads
             </Typography>
             <Link to="/search">
-              <IconButton  className={classes.searchIcon} aria-label="Search">
+              <IconButton  className="icon-search" aria-label="Search">
                  <Search />
               </IconButton>
             </Link>
           </Toolbar>
         </AppBar>
         <BookList />
-        <footer>
-            <div>@Copyright 2018 Carolyn Ulfe</div>
+        <footer className="footer">
+          <Icon>copyright</Icon><span> 2018 Carolyn Ulfe</span>
         </footer>
       </div>
     )
   }
 }
 
-export default withStyles(styles)(BooksApp);
+export default BooksApp;
