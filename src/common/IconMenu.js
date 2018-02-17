@@ -3,15 +3,14 @@ import MoreVertIcon from 'material-ui-icons/MoreVert';
 import Menu, { MenuItem } from 'material-ui/Menu';
 import IconButton from 'material-ui/IconButton';
 
-const ITEM_HEIGHT = 48;
+//const ITEM_HEIGHT = 48;
 
 class IconMenu extends Component {
     state = {
       anchorEl: null,
     };
 
-    handleClick = (e) => {
-      e.preventDefault();
+    handleClick = (event) => {
       this.setState({ anchorEl: event.currentTarget });
     };
 
@@ -19,23 +18,22 @@ class IconMenu extends Component {
       this.setState({ anchorEl: null });
     };
 
-    selectShelf = (e, value) => {
-      e.preventDefault();
-      //this.setState({ anchorEl: event.currentTarget });
-      console.log("this.props.updateBookShelf: ", this.props.updateBookShelf(this.props.book, value));
-      console.log("selectShelf");
+    selectShelf = (event, value) => {
+      this.props.updateBookShelf(this.props.book, value);
       this.setState({ anchorEl: null });
-
     };
 
   render() {
     const { book } = this.props;
     const { anchorEl } = this.state;
 
-  //  console.log("icon menu: ", book);
     return (
       <div>
-        <IconButton onClick={this.handleClick}>
+        <IconButton
+          aria-label="More"
+          aria-owns={anchorEl ? 'long-menu' : null}
+          aria-haspopup="true"
+          onClick={this.handleClick}>
           <MoreVertIcon />
         </IconButton>
         <Menu
@@ -45,20 +43,18 @@ class IconMenu extends Component {
           onClose={this.handleClose}
           PaperProps={{
             style: {
-              maxHeight: ITEM_HEIGHT * 4.5,
-              width: 200,
+            //  maxHeight: ITEM_HEIGHT * 4.5,
+            //  width: 200,
             },
           }}>
             <MenuItem
               selected={book.shelf === "currentlyReading"}
-              onClick={(e) => this.selectShelf(e, "currentlyReading")}
-              value="currentlyReading">
+              onClick={(e) => this.selectShelf(e, "currentlyReading")}>
               Currently Reading
             </MenuItem>
             <MenuItem
               selected={book.shelf === "wantToRead"}
-              onClick={(e) => this.selectShelf(e, "wantToRead")}
-              value="wantToRead">
+              onClick={(e) => this.selectShelf(e, "wantToRead")}>
               Want to Read
             </MenuItem>
             <MenuItem

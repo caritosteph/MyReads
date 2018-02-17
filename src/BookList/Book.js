@@ -39,7 +39,7 @@ class Book extends React.Component {
           <CardHeader
             avatar={
               <Avatar aria-label="Recipe" className={classes.avatar}>
-                R
+                {book.shelf.charAt(0).toUpperCase()}
               </Avatar>
             }
             action={<IconMenu updateBookShelf={updateBookShelf} book={book}/>}

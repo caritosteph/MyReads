@@ -40,7 +40,6 @@ class BookList extends Component {
   updateBookShelf = (book, self) => {
     BooksAPI.update(book, self)
       .then( result => {
-        console.log("Result update: ", result);
         this.setState(state => ({
           currentlyReading: state.bookList.filter(book => result.currentlyReading.indexOf(book.id)>=0),
           wantToRead: state.bookList.filter(book => result.wantToRead.indexOf(book.id)>=0),
