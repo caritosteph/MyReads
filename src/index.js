@@ -1,6 +1,12 @@
+import React from 'react';
 import { render } from 'react-dom';
+import { BrowserRouter } from 'react-router-dom'
+import App from './App';
+
 import './index.css';
-import routes from './routes';
 
 const rootEl = document.getElementById('root');
-render(routes, rootEl);
+render(
+  <BrowserRouter>
+    <App/>
+  </BrowserRouter>, rootEl);

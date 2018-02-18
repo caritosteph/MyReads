@@ -1,42 +1,61 @@
 import React from 'react';
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
-import IconButton from 'material-ui/IconButton';
-import Search from 'material-ui-icons/Search';
-import Icon from 'material-ui/Icon';
-import Tooltip from 'material-ui/Tooltip';
-import { Link } from 'react-router-dom';
-import BookShelves from './BookList/BookShelves';
+import * as BooksAPI from './BooksAPI';
+import BookMain from './BookList/BookMain';
+import { Route } from 'react-router-dom'
+import BookSearch from './BookSearch/BookSearch';
 
 import './app.css';
 
 class BooksApp extends React.Component {
+  state = {
+    bookList: [],
+    currentlyReading: [],
+    wantToRead: [],
+    read: []
+  }
+
+  componentDidMount() {
+    BooksAPI.getAll()
+      .then( bookList => {
+          this.setState({
+            bookList: bookList,
+            currentlyReading: bookList.filter(book => book.shelf === "currentlyReading"),
+            wantToRead: bookList.filter(book => book.shelf === "wantToRead"),
+            read: bookList.filter(book => book.shelf === "read")
+          });
+    });
+  }
+
+  updateBookShelf = (book, self) => {
+    BooksAPI.update(book, self)
+      .then( result => {
+        this.setState(state => ({
+          currentlyReading: state.bookList.filter(book => result.currentlyReading.indexOf(book.id)>=0),
+          wantToRead: state.bookList.filter(book => result.wantToRead.indexOf(book.id)>=0),
+          read: state.bookList.filter(book => result.read.indexOf(book.id)>=0)
+        }));
+      });
+  }
 
   render() {
 
     return (
-      <div className="navbar-books">
-        <AppBar position="static">
-          <Toolbar>
-            <Typography variant="title" color="inherit" className="flex-typography">
-              My Reads
-            </Typography>
-            <Link to="/search">
-              <Tooltip id="tooltip-search" title="Search books">
-                <IconButton  className="icon-search" aria-label="Search">
-                   <Search />
-                </IconButton>
-              </Tooltip>
-            </Link>
-          </Toolbar>
-        </AppBar>
-        <BookShelves />
-        <footer className="footer">
-          <Icon>copyright</Icon><span> 2018 Carolyn Ulfe</span>
-        </footer>
-      </div>
-    )
+        <div>
+          <Route exact path="/" render={() => (
+            <BookMain
+                {...this.state}
+                updateBookShelf={this.updateBookShelf} />
+            )}>
+          </Route>
+          <Route exact path="/search" render={() => (
+            <BookSearch
+                {...this.state}
+                updateBookShelf={this.updateBookShelf}/>
+            )}>
+          </Route>
+        </div>
+    );
+
   }
 }
 
