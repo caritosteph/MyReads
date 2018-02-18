@@ -24,7 +24,7 @@ const Book = ({ book, actionMenu }) => {
           />
           <CardMedia
             className="card-media"
-            image={book.imageLinks.thumbnail}
+            image={book.imageLinks ? book.imageLinks.thumbnail : "http://via.placeholder.com/250/1565C0/fff?text=No+Image+Available"}
           />
           <CardContent>
             <Typography component="p">

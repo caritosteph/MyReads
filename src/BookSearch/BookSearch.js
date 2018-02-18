@@ -21,23 +21,35 @@ class BookSearch extends Component {
   }
 
   onHandleChange = (e) => {
-    var query = e.target.value ? e.target.value : "";
+    const query = e.target.value ? e.target.value : "";
+    const actualBooks = this.props.actualBooks;
 
     BooksAPI.search(query)
-      .then(data=> {
+      .then(search => {
         this.setState ({
-          listBooks: data
-        })
+          listBooks: search ? this.setBookShelf(search, actualBooks) : []
+        });
       })
       .catch(err => {
         console.error("error: ", err);
-      })
+      });
   }
 
   onHandleKeyDown = (e) => {
     if (e.keyCode === ENTER_KEY) {
       this.onHandleChange(e);
     }
+  }
+
+  setBookShelf = (search, actualBooks) => {
+    return search.map(book => {
+      for (var i = 0, arr = actualBooks.length; i < arr; i++) {
+        if(actualBooks[i].id === book.id) {
+          book.shelf = actualBooks[i].shelf;
+        }
+      }
+      return book;
+    })
   }
 
   render(){

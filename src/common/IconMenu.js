@@ -9,6 +9,7 @@ const ITEM_HEIGHT = 50;
 class IconMenu extends Component {
     state = {
       anchorEl: null,
+      itemValue: this.props.book.shelf
     };
 
     handleClick = (event) => {
@@ -21,12 +22,15 @@ class IconMenu extends Component {
 
     selectShelf = (e, value) => {
       this.props.actionMenu(this.props.book, value);
-      this.setState({ anchorEl: null });
+      this.setState({
+        anchorEl: null,
+        itemValue: value
+      });
     };
 
   render() {
-    const { book } = this.props;
-    const { anchorEl } = this.state;
+
+    const { anchorEl, itemValue } = this.state;
 
     return (
       <div>
@@ -51,23 +55,22 @@ class IconMenu extends Component {
              },
            }}>
              <MenuItem
-               selected={book.shelf === "currentlyReading"}
+               selected={itemValue === "currentlyReading"}
                onClick={(e) => this.selectShelf(e, "currentlyReading")}>
                Currently Reading
              </MenuItem>
              <MenuItem
-               selected={book.shelf === "wantToRead"}
+               selected={itemValue === "wantToRead"}
                onClick={(e) => this.selectShelf(e, "wantToRead")}>
                Want to Read
              </MenuItem>
              <MenuItem
-               selected={book.shelf && book.shelf === "read"}
-               onClick={(e) => this.selectShelf(e, "read")}
-               value="read">
+               selected={itemValue === "read"}
+               onClick={(e) => this.selectShelf(e, "read")}>
                Read
              </MenuItem>
              <MenuItem
-               selected={!book.shelf}
+               selected={itemValue === "none" || !itemValue}
                onClick={(e) => this.selectShelf(e, "none")}>
                None
              </MenuItem>

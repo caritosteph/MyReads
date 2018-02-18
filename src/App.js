@@ -18,7 +18,6 @@ class BooksApp extends React.Component {
     BooksAPI.getAll()
       .then( bookList => {
           this.setState({
-            bookList: bookList,
             currentlyReading: bookList.filter(book => book.shelf === "currentlyReading"),
             wantToRead: bookList.filter(book => book.shelf === "wantToRead"),
             read: bookList.filter(book => book.shelf === "read")
@@ -29,40 +28,18 @@ class BooksApp extends React.Component {
   changeBookShelf = (book, shelf) => {
     BooksAPI.update(book, shelf)
       .then( result => {
-        this.setState(state => ({
-          currentlyReading: state.bookList.filter(book => result.currentlyReading.indexOf(book.id)>=0),
-          wantToRead: state.bookList.filter(book => result.wantToRead.indexOf(book.id)>=0),
-          read: state.bookList.filter(book => result.read.indexOf(book.id)>=0)
-        }));
-
-      });
-  }
-
-  addToBookShelf = (book, shelf) => {
-    BooksAPI.update(book, shelf)
-      .then(() => {
-        BooksAPI.get(book.id)
-          .then( result => {
-            switch (shelf) {
-              case "currentlyReading":
-                this.setState(state => ({
-                  currentlyReading: state.currentlyReading.concat(result)
-                }));
-                break;
-              case "wantToRead":
-                this.setState(state => ({
-                  wantToRead: state.wantToRead.concat(result)
-                }));
-                break;
-              case "read":
-                this.setState(state => ({
-                  read: state.read.concat(result)
-                }));
-                break;
-              default: break;
-            }
-            console.log("addBookShelf: ", this.state);
-          });
+        BooksAPI.getAll()
+          .then( bookList => {
+              this.setState({ bookList: bookList});
+              BooksAPI.get(book.id)
+                .then( detail => {
+                  this.setState(state => ({
+                    currentlyReading: shelf === "currentlyReading" ? state.currentlyReading.concat(detail) : state.bookList.filter(book => result.currentlyReading.indexOf(book.id)>=0),
+                    wantToRead: shelf === "wantToRead" ? state.wantToRead.concat(detail) : state.bookList.filter(book => result.wantToRead.indexOf(book.id)>=0),
+                    read: shelf === "read" ? state.read.concat(detail) : state.bookList.filter(book => result.read.indexOf(book.id)>=0)
+                  }));
+                });
+            });
       });
   }
 
@@ -78,8 +55,8 @@ class BooksApp extends React.Component {
           </Route>
           <Route exact path="/search" render={() => (
             <BookSearch
-                {...this.state}
-                actionMenu={this.addToBookShelf}/>
+                actualBooks={this.state.bookList}
+                actionMenu={this.changeBookShelf}/>
             )}>
           </Route>
         </div>
