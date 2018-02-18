@@ -1,17 +1,21 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Icon from 'material-ui/Icon';
+import Tooltip from 'material-ui/Tooltip';
+import { Link } from 'react-router-dom';
+
+import './emptyShelf.css';
 
 const EmptyShelf = () => {
   return (
     <div className="empty-shelf">
-      <i class="material-icons">note_add</i>
+      <h4>Empty Shelf</h4>
+      <Link to="/search">
+        <Tooltip id="tooltip-add" title="Add books">
+          <Icon>note_add</Icon>
+        </Tooltip>
+      </Link>
     </div>
   );
 }
-
-EmptyShelf.propTypes = {
-
-};
 
 export default EmptyShelf;

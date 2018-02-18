@@ -3,6 +3,8 @@ import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
 import * as BooksAPI from '../BooksAPI';
 import BookList from './BookList';
+import EmptyShelf from '../common/EmptyShelf';
+
 import './books.css';
 
 class BookShelves extends Component {
@@ -46,15 +48,15 @@ class BookShelves extends Component {
           <Grid item xs={12}>
             <Paper className="paper-shelf">Currently Reading</Paper>
           </Grid>
-          <BookList listBooks={currentlyReading} updateBookShelf={this.updateBookShelf}/>
+          {currentlyReading.length > 0 ? <BookList listBooks={currentlyReading} updateBookShelf={this.updateBookShelf}/> : <EmptyShelf/>}
           <Grid item xs={12}>
             <Paper className="paper-shelf">Want to Read</Paper>
           </Grid>
-          <BookList listBooks={wantToRead} updateBookShelf={this.updateBookShelf}/>
+          {wantToRead.length > 0 ? <BookList listBooks={wantToRead} updateBookShelf={this.updateBookShelf}/> : <EmptyShelf/>}
           <Grid item xs={12}>
             <Paper className="paper-shelf">Read</Paper>
           </Grid>
-          <BookList listBooks={read} updateBookShelf={this.updateBookShelf}/>
+          {read.length > 0 ? <BookList listBooks={read} updateBookShelf={this.updateBookShelf}/> : <EmptyShelf/>}
         </Grid>
       </div>
     );

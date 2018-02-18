@@ -5,6 +5,7 @@ import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 import Search from 'material-ui-icons/Search';
 import Icon from 'material-ui/Icon';
+import Tooltip from 'material-ui/Tooltip';
 import { Link } from 'react-router-dom';
 import BookShelves from './BookList/BookShelves';
 
@@ -22,9 +23,11 @@ class BooksApp extends React.Component {
               My Reads
             </Typography>
             <Link to="/search">
-              <IconButton  className="icon-search" aria-label="Search">
-                 <Search />
-              </IconButton>
+              <Tooltip id="tooltip-search" title="Search books">
+                <IconButton  className="icon-search" aria-label="Search">
+                   <Search />
+                </IconButton>
+              </Tooltip>
             </Link>
           </Toolbar>
         </AppBar>
