@@ -1,4 +1,5 @@
 import React from 'react';
+import { PropTypes } from 'prop-types';
 import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
 import BookList from './BookList';
@@ -16,18 +17,34 @@ const BookShelves = ({...props}) => {
         <Grid item xs={12}>
           <Paper className="paper-shelf">Currently Reading</Paper>
         </Grid>
-        {currentlyReading && currentlyReading.length > 0 ? <BookList listBooks={currentlyReading} actionMenu={actionMenu}/> : <EmptyShelf/>}
+        {currentlyReading && currentlyReading.length > 0 ?
+          <BookList
+            listBooks={currentlyReading}
+            actionMenu={actionMenu}/> : <EmptyShelf/>}
         <Grid item xs={12}>
           <Paper className="paper-shelf">Want to Read</Paper>
         </Grid>
-        {wantToRead && wantToRead.length > 0 ? <BookList listBooks={wantToRead} actionMenu={actionMenu}/> : <EmptyShelf/>}
+        {wantToRead && wantToRead.length > 0 ?
+          <BookList
+            listBooks={wantToRead}
+            actionMenu={actionMenu}/> : <EmptyShelf/>}
         <Grid item xs={12}>
           <Paper className="paper-shelf">Read</Paper>
         </Grid>
-        {read && read.length > 0 ? <BookList listBooks={read} actionMenu={actionMenu}/> : <EmptyShelf/>}
+        {read && read.length > 0 ?
+           <BookList
+             listBooks={read}
+             actionMenu={actionMenu}/> : <EmptyShelf/>}
       </Grid>
     </div>
   );
+}
+
+BookShelves.propTypes = {
+  currentlyReading: PropTypes.array.isRequired,
+  wantToRead: PropTypes.array.isRequired,
+  read: PropTypes.array.isRequired,
+  actionMenu: PropTypes.func.isRequired
 }
 
 export default  BookShelves;

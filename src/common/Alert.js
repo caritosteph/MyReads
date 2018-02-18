@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
 import Snackbar from 'material-ui/Snackbar';
 
 class Alert extends Component {
@@ -22,6 +23,11 @@ class Alert extends Component {
       </div>
     );
   }
+}
+
+Alert.propTypes = {
+  showAlert: PropTypes.bool.isRequired,
+  handleAlertClose: PropTypes.func.isRequired
 }
 
 export default Alert;

@@ -92,7 +92,10 @@ class BookSearch extends Component {
                 onKeyDown={this.onHandleKeyDown}/>
           </Toolbar>
         </AppBar>
-        {listBooks && listBooks.length > 0 ? <BookList listBooks={listBooks} actionMenu={actionMenu}/> : <EmptySearch/>}
+        {listBooks && listBooks.length > 0 ?
+          <BookList
+            listBooks={listBooks}
+            actionMenu={actionMenu}/> : <EmptySearch/>}
         <footer className="footer">
           <Icon>copyright</Icon><span> 2018 Carolyn Ulfe</span>
         </footer>

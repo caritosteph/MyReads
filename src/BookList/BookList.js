@@ -1,4 +1,5 @@
 import React from 'react';
+import { PropTypes } from 'prop-types';
 import Book from './Book';
 import Grid from 'material-ui/Grid';
 
@@ -16,6 +17,11 @@ const BookList = ({ listBooks, actionMenu }) => {
       ))}
     </Grid>
   );
+}
+
+BookList.propTypes = {
+  listBooks: PropTypes.array.isRequired,
+  actionMenu: PropTypes.func.isRequired
 }
 
 export default BookList;
