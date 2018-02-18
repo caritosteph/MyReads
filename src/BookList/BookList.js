@@ -3,6 +3,9 @@ import Book from './Book';
 import Grid from 'material-ui/Grid';
 
 const BookList = ({ listBooks, actionMenu }) => {
+  /*
+   * TODO: add book list in the view
+   */
   return (
     <Grid container>
       {listBooks.map((book) => (

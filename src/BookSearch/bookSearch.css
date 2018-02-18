@@ -38,3 +38,17 @@
 .empty-search-icon {
   font-size: 60px;
 }
+
+
+/* Footer */
+
+footer {
+  padding: 20px;
+  text-align: center;
+  background-color: #3f51b5;
+  color: #fff;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}

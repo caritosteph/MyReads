@@ -10,6 +10,9 @@ import Button from 'material-ui/Button';
 import IconMenu from '../common/IconMenu'
 
 const Book = ({ book, actionMenu }) => {
+  /*
+   * TODO: Show card book  with menu action and details
+   */
     return (
       <Grid item xs={3}>
         <Card className="card-book">

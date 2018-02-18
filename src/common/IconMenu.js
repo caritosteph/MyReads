@@ -21,6 +21,9 @@ class IconMenu extends Component {
     };
 
     selectShelf = (e, value) => {
+      /*
+       * TODO: Menu with the differents shelf's types and it's shown in the principal view
+       */
       if(this.state.itemValue === value) {
         return;
       }

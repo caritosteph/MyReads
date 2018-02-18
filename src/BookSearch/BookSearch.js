@@ -22,6 +22,9 @@ class BookSearch extends Component {
   }
 
   onHandleChange = (e) => {
+    /*
+     * TODO: Searching books while  it's typing
+     */
     const query = e.target.value;
     const actualBooks = this.props.actualBooks;
 
@@ -46,6 +49,9 @@ class BookSearch extends Component {
   }
 
   onHandleKeyDown = (e) => {
+    /*
+     * TODO: Searching books when press enter
+     */
     if (e.keyCode === ENTER_KEY) {
       this.onHandleChange(e);
     }

@@ -5,6 +5,10 @@ import App from './App';
 
 import './index.css';
 
+/*
+ * TODO: Routing
+ */
+
 const rootEl = document.getElementById('root');
 render(
   <BrowserRouter>

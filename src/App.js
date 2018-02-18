@@ -15,6 +15,9 @@ class BooksApp extends React.Component {
   }
 
   componentDidMount() {
+    /*
+     * TODO: Getting all books and showing in each shelf
+     */
     BooksAPI.getAll()
       .then( bookList => {
           this.setState({
@@ -24,15 +27,14 @@ class BooksApp extends React.Component {
           });
       })
       .catch( () => {
-        this.setState({
-          currentlyReading: [],
-          wantToRead: [],
-          read: []
-        });
+        this.resetValues()
       });
   }
 
   changeBookShelf = (book, shelf) => {
+    /*
+     * TODO: Change books of one shelf to another and it's saved in the database
+     */
     BooksAPI.update(book, shelf)
       .then( result => {
         BooksAPI.getAll()
@@ -47,27 +49,28 @@ class BooksApp extends React.Component {
                   }));
                 })
                 .catch( () => {
-                  this.setState({
-                    currentlyReading: [],
-                    wantToRead: [],
-                    read: []
-                  });
+                  this.resetValues()
                 });
             })
             .catch( () => {
-              this.setState({
-                bookList: [],
-              });
+              this.resetValues()
             });
       })
       .catch( () => {
-        this.setState({
-          bookList: [],
-          currentlyReading: [],
-          wantToRead: [],
-          read: []
-        });
+        this.resetValues()
       });
+  }
+
+  resetValues = () => {
+    /*
+     * TODO: Catching API errors
+     */
+    this.setState({
+      bookList: [],
+      currentlyReading: [],
+      wantToRead: [],
+      read: []
+    });
   }
 
   render() {
