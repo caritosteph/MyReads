@@ -8,7 +8,7 @@ import './books.css';
 
 const BookShelves = ({...props}) => {
 
-  const { currentlyReading, wantToRead, read, updateBookShelf } = props;
+  const { currentlyReading, wantToRead, read, actionMenu } = props;
 
   return (
     <div className="grid-books">
@@ -16,15 +16,15 @@ const BookShelves = ({...props}) => {
         <Grid item xs={12}>
           <Paper className="paper-shelf">Currently Reading</Paper>
         </Grid>
-        {currentlyReading.length > 0 ? <BookList listBooks={currentlyReading} updateBookShelf={updateBookShelf}/> : <EmptyShelf/>}
+        {currentlyReading && currentlyReading.length > 0 ? <BookList listBooks={currentlyReading} actionMenu={actionMenu}/> : <EmptyShelf/>}
         <Grid item xs={12}>
           <Paper className="paper-shelf">Want to Read</Paper>
         </Grid>
-        {wantToRead.length > 0 ? <BookList listBooks={wantToRead} updateBookShelf={updateBookShelf}/> : <EmptyShelf/>}
+        {wantToRead && wantToRead.length > 0 ? <BookList listBooks={wantToRead} actionMenu={actionMenu}/> : <EmptyShelf/>}
         <Grid item xs={12}>
           <Paper className="paper-shelf">Read</Paper>
         </Grid>
-        {read.length > 0 ? <BookList listBooks={read} updateBookShelf={updateBookShelf}/> : <EmptyShelf/>}
+        {read && read.length > 0 ? <BookList listBooks={read} actionMenu={actionMenu}/> : <EmptyShelf/>}
       </Grid>
     </div>
   );

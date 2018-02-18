@@ -9,7 +9,7 @@ import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
 import IconMenu from '../common/IconMenu'
 
-const Book = ({ book, updateBookShelf }) => {
+const Book = ({ book, actionMenu }) => {
     return (
       <Grid item xs={3}>
         <Card className="card-book">
@@ -19,7 +19,7 @@ const Book = ({ book, updateBookShelf }) => {
                 {book.title.charAt(0).toUpperCase()}
               </Avatar>
             }
-            action={<IconMenu updateBookShelf={updateBookShelf} book={book}/>}
+            action={<IconMenu actionMenu={actionMenu} book={book}/>}
             title={book.title}
           />
           <CardMedia

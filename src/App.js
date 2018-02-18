@@ -26,14 +26,43 @@ class BooksApp extends React.Component {
     });
   }
 
-  updateBookShelf = (book, self) => {
-    BooksAPI.update(book, self)
+  changeBookShelf = (book, shelf) => {
+    BooksAPI.update(book, shelf)
       .then( result => {
         this.setState(state => ({
           currentlyReading: state.bookList.filter(book => result.currentlyReading.indexOf(book.id)>=0),
           wantToRead: state.bookList.filter(book => result.wantToRead.indexOf(book.id)>=0),
           read: state.bookList.filter(book => result.read.indexOf(book.id)>=0)
         }));
+
+      });
+  }
+
+  addToBookShelf = (book, shelf) => {
+    BooksAPI.update(book, shelf)
+      .then(() => {
+        BooksAPI.get(book.id)
+          .then( result => {
+            switch (shelf) {
+              case "currentlyReading":
+                this.setState(state => ({
+                  currentlyReading: state.currentlyReading.concat(result)
+                }));
+                break;
+              case "wantToRead":
+                this.setState(state => ({
+                  wantToRead: state.wantToRead.concat(result)
+                }));
+                break;
+              case "read":
+                this.setState(state => ({
+                  read: state.read.concat(result)
+                }));
+                break;
+              default: break;
+            }
+            console.log("addBookShelf: ", this.state);
+          });
       });
   }
 
@@ -44,13 +73,13 @@ class BooksApp extends React.Component {
           <Route exact path="/" render={() => (
             <BookMain
                 {...this.state}
-                updateBookShelf={this.updateBookShelf} />
+                actionMenu={this.changeBookShelf} />
             )}>
           </Route>
           <Route exact path="/search" render={() => (
             <BookSearch
                 {...this.state}
-                updateBookShelf={this.updateBookShelf}/>
+                actionMenu={this.addToBookShelf}/>
             )}>
           </Route>
         </div>

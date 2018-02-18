@@ -12,6 +12,8 @@ import EmptySearch from './EmptySearch';
 
 import './bookSearch.css';
 
+const ENTER_KEY = 13;
+
 class BookSearch extends Component {
 
   state = {
@@ -19,26 +21,29 @@ class BookSearch extends Component {
   }
 
   onHandleChange = (e) => {
-    var query = e.target.value;
+    var query = e.target.value ? e.target.value : "";
+
     BooksAPI.search(query)
       .then(data=> {
-        console.log("data: ", data);
         this.setState ({
           listBooks: data
         })
       })
       .catch(err => {
-        console.log("error: ", err);
+        console.error("error: ", err);
       })
   }
 
-  updateBookShelf = (book, self) => {
-    BooksAPI.update(book, self);
+  onHandleKeyDown = (e) => {
+    if (e.keyCode === ENTER_KEY) {
+      this.onHandleChange(e);
+    }
   }
 
   render(){
 
     const { listBooks } = this.state;
+    const { actionMenu } = this.props;
 
     return (
       <div className="search-container">
@@ -55,10 +60,11 @@ class BookSearch extends Component {
                 className="search-input"
                 fullWidth={true}
                 endAdornment={<InputAdornment position="end"><Search /></InputAdornment>}
-                onChange={this.onHandleChange}/>
+                onChange={this.onHandleChange}
+                onKeyDown={this.onHandleKeyDown}/>
           </Toolbar>
         </AppBar>
-        {listBooks.length > 0 ? <BookList listBooks={listBooks} updateBookShelf={this.updateBookShelf}/> : <EmptySearch/>}
+        {listBooks && listBooks.length > 0 ? <BookList listBooks={listBooks} actionMenu={actionMenu}/> : <EmptySearch/>}
       </div>
     );
   }
