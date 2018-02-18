@@ -3,6 +3,7 @@ import BookMain from './BookList/BookMain';
 import { Route } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI';
 import BookSearch from './BookSearch/BookSearch';
+import Alert from './common/Alert';
 
 import './app.css';
 
@@ -11,7 +12,8 @@ class BooksApp extends React.Component {
     bookList: [],
     currentlyReading: [],
     wantToRead: [],
-    read: []
+    read: [],
+    showAlert: false
   }
 
   componentDidMount() {
@@ -45,7 +47,8 @@ class BooksApp extends React.Component {
                   this.setState(state => ({
                     currentlyReading: shelf === "currentlyReading" ? state.currentlyReading.concat(detail) : state.bookList.filter(book => result.currentlyReading.indexOf(book.id)>=0),
                     wantToRead: shelf === "wantToRead" ? state.wantToRead.concat(detail) : state.bookList.filter(book => result.wantToRead.indexOf(book.id)>=0),
-                    read: shelf === "read" ? state.read.concat(detail) : state.bookList.filter(book => result.read.indexOf(book.id)>=0)
+                    read: shelf === "read" ? state.read.concat(detail) : state.bookList.filter(book => result.read.indexOf(book.id)>=0),
+                    showAlert: true
                   }));
                 })
                 .catch( () => {
@@ -73,6 +76,10 @@ class BooksApp extends React.Component {
     });
   }
 
+  handleAlertClose = () => {
+    this.setState({ showAlert: false });
+  };
+
   render() {
 
     return (
@@ -89,6 +96,9 @@ class BooksApp extends React.Component {
                 actionMenu={this.changeBookShelf}/>
             )}>
           </Route>
+          <Alert
+            {...this.state}
+            handleAlertClose={this.handleAlertClose} />
         </div>
     );
 
