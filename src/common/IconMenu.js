@@ -21,6 +21,9 @@ class IconMenu extends Component {
     };
 
     selectShelf = (e, value) => {
+      if(this.state.itemValue === value) {
+        return;
+      }
       this.props.actionMenu(this.props.book, value);
       this.setState({
         anchorEl: null,

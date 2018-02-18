@@ -6,6 +6,7 @@
 
  .grid-books {
    flex-grow: 1;
+   margin-bottom: 80px;
  }
 
  .paper-shelf {

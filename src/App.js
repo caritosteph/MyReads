@@ -1,7 +1,7 @@
 import React from 'react';
-import * as BooksAPI from './BooksAPI';
 import BookMain from './BookList/BookMain';
 import { Route } from 'react-router-dom'
+import * as BooksAPI from './BooksAPI';
 import BookSearch from './BookSearch/BookSearch';
 
 import './app.css';
@@ -22,7 +22,14 @@ class BooksApp extends React.Component {
             wantToRead: bookList.filter(book => book.shelf === "wantToRead"),
             read: bookList.filter(book => book.shelf === "read")
           });
-    });
+      })
+      .catch( () => {
+        this.setState({
+          currentlyReading: [],
+          wantToRead: [],
+          read: []
+        });
+      });
   }
 
   changeBookShelf = (book, shelf) => {
@@ -38,8 +45,28 @@ class BooksApp extends React.Component {
                     wantToRead: shelf === "wantToRead" ? state.wantToRead.concat(detail) : state.bookList.filter(book => result.wantToRead.indexOf(book.id)>=0),
                     read: shelf === "read" ? state.read.concat(detail) : state.bookList.filter(book => result.read.indexOf(book.id)>=0)
                   }));
+                })
+                .catch( () => {
+                  this.setState({
+                    currentlyReading: [],
+                    wantToRead: [],
+                    read: []
+                  });
                 });
+            })
+            .catch( () => {
+              this.setState({
+                bookList: [],
+              });
             });
+      })
+      .catch( () => {
+        this.setState({
+          bookList: [],
+          currentlyReading: [],
+          wantToRead: [],
+          read: []
+        });
       });
   }
 

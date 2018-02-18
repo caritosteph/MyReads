@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import IconButton from 'material-ui/IconButton';
+import Icon from 'material-ui/Icon';
 import Search from 'material-ui-icons/Search';
 import ArrowBack from 'material-ui-icons/ArrowBack';
 import { Link } from 'react-router-dom';
@@ -21,17 +22,26 @@ class BookSearch extends Component {
   }
 
   onHandleChange = (e) => {
-    const query = e.target.value ? e.target.value : "";
+    const query = e.target.value;
     const actualBooks = this.props.actualBooks;
+
+    if(query === "") {
+      this.setState ({
+        listBooks: []
+      });
+      return;
+    }
 
     BooksAPI.search(query)
       .then(search => {
         this.setState ({
-          listBooks: search ? this.setBookShelf(search, actualBooks) : []
+          listBooks: !search.items ? this.setBookShelf(search, actualBooks) : []
         });
       })
       .catch(err => {
-        console.error("error: ", err);
+        this.setState ({
+          listBooks: []
+        });
       });
   }
 
@@ -77,6 +87,9 @@ class BookSearch extends Component {
           </Toolbar>
         </AppBar>
         {listBooks && listBooks.length > 0 ? <BookList listBooks={listBooks} actionMenu={actionMenu}/> : <EmptySearch/>}
+        <footer className="footer">
+          <Icon>copyright</Icon><span> 2018 Carolyn Ulfe</span>
+        </footer>
       </div>
     );
   }

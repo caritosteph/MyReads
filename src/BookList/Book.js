@@ -28,7 +28,7 @@ const Book = ({ book, actionMenu }) => {
           />
           <CardContent>
             <Typography component="p">
-              <strong>Author(s):</strong> { book.authors ? book.authors.join(", ") : book.authors}
+              <strong>Author(s):</strong> { book.authors ? book.authors.join(", ") : "No author"}
             </Typography>
             <Typography component="p">
               <strong>Category:</strong> {book.categories ? book.categories : "General"}
