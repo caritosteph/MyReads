@@ -1,44 +1,21 @@
 
 import React from 'react';
-import { withStyles } from 'material-ui/styles';
 import Card, { CardHeader, CardMedia, CardContent, CardActions } from 'material-ui/Card';
 import Avatar from 'material-ui/Avatar';
 import IconButton from 'material-ui/IconButton';
 import Typography from 'material-ui/Typography';
-import red from 'material-ui/colors/red';
 import FavoriteIcon from 'material-ui-icons/Favorite';
 import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
 import IconMenu from '../common/IconMenu'
 
-const styles = theme => ({
-  card: {
-    maxWidth: 400,
-    margin: 20,
-  },
-  media: {
-    height: 194,
-  },
-  actions: {
-    display: 'flex',
-    justifyContent: 'space-between'
-  },
-  avatar: {
-    backgroundColor: red[500],
-  },
-});
-
-class Book extends React.Component {
-
-  render() {
-    const { classes, updateBookShelf, book } = this.props;
-
+const Book = ({ book, updateBookShelf }) => {
     return (
       <Grid item xs={3}>
-        <Card className={classes.card}>
+        <Card className="card-book">
           <CardHeader
             avatar={
-              <Avatar aria-label="Recipe" className={classes.avatar}>
+              <Avatar aria-label="Recipe" className="card-avatar">
                 {book.title.charAt(0).toUpperCase()}
               </Avatar>
             }
@@ -46,7 +23,7 @@ class Book extends React.Component {
             title={book.title}
           />
           <CardMedia
-            className={classes.media}
+            className="card-media"
             image={book.imageLinks.thumbnail}
           />
           <CardContent>
@@ -57,7 +34,7 @@ class Book extends React.Component {
               <strong>Category:</strong> {book.categories ? book.categories : "General"}
             </Typography>
           </CardContent>
-          <CardActions className={classes.actions} disableActionSpacing>
+          <CardActions className="card-actions" disableActionSpacing>
             <IconButton aria-label="Add to favorites">
               <FavoriteIcon />
             </IconButton>
@@ -68,7 +45,6 @@ class Book extends React.Component {
         </Card>
       </Grid>
     );
-  }
 }
 
-export default withStyles(styles)(Book);
+export default Book;

@@ -6,7 +6,9 @@ import IconButton from 'material-ui/IconButton';
 import Search from 'material-ui-icons/Search';
 import Icon from 'material-ui/Icon';
 import { Link } from 'react-router-dom';
-import BookList from './BookList/BookList';
+import BookShelves from './BookList/BookShelves';
+
+import './app.css';
 
 class BooksApp extends React.Component {
 
@@ -26,7 +28,7 @@ class BooksApp extends React.Component {
             </Link>
           </Toolbar>
         </AppBar>
-        <BookList />
+        <BookShelves />
         <footer className="footer">
           <Icon>copyright</Icon><span> 2018 Carolyn Ulfe</span>
         </footer>

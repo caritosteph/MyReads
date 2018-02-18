@@ -1,0 +1,39 @@
+/*
+ * Shelves Books
+ */
+
+ /* Grid */
+
+ .grid-books {
+   flex-grow: 1;
+ }
+
+ .paper-shelf {
+   padding: 16px;
+   text-align: center;
+   color: rgb(36, 72, 159);
+ }
+
+ /*
+  * Book
+  */
+
+  /* Card */
+
+ .card-book {
+   max-width: 400px;
+   margin: 20px;
+ }
+
+ .card-avatar {
+   background-color: #f44336!important;
+ }
+
+ .card-media {
+   height: 194px;
+ }
+
+ .card-actions {
+   display: flex;
+   justify-content: space-between;
+ }
