@@ -37,14 +37,6 @@ const Book = ({ book, actionMenu }) => {
               <strong>Category:</strong> {book.categories ? book.categories : "General"}
             </Typography>
           </CardContent>
-          <CardActions className="card-actions" disableActionSpacing>
-            <IconButton aria-label="Add to favorites">
-              <FavoriteIcon />
-            </IconButton>
-            <Button size="small" color="primary">
-              Show More
-            </Button>
-          </CardActions>
         </Card>
       </Grid>
     );

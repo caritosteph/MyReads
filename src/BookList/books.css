@@ -6,7 +6,8 @@
 
  .grid-books {
    flex-grow: 1;
-   margin-bottom: 80px;
+   max-width: 100%;
+   overflow-x: hidden;
  }
 
  .paper-shelf {

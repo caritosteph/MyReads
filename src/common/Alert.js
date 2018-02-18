@@ -10,7 +10,7 @@ class Alert extends Component {
         <Snackbar
           anchorOrigin={{
             vertical: 'top',
-            horizontal: 'left',
+            horizontal: 'center',
           }}
           open={showAlert}
           onClose={handleAlertClose}
