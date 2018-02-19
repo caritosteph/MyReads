@@ -26,6 +26,6 @@ To install My Reads follow the following steps:
 
 [`BooksAPI.js`](src/BooksAPI.js) contains the methods to perform necessary operations on the backend:
 
-* [`getAll`](#getall) - returns a collection of book objects
-* [`update`](#update) - returns a Promise which resolves to a JSON object containing the response data of the POST request.
-* [`search`](#search) - returns a Promise which resolves to a JSON object containing a collection of a maximum of 20 book objects.
+* `getAll()` - returns a collection of book objects
+* `update(book, shelf)` - returns a Promise which resolves to a JSON object containing the response data of the POST request.
+* `search(query)` - returns a Promise which resolves to a JSON object containing a collection of a maximum of 20 book objects.
