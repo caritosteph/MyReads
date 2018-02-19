@@ -1,15 +1,28 @@
 # MyReads Project
 
-MyReads project, you'll create a bookshelf app that allows you to select and categorize books you have read, are currently reading, or want to read. The project emphasizes using React to build the application and provides an API server and client library that you will use to persist information as you interact with the application.
+MyReads project, allows you to select and categorize books you have read, are currently reading, or want to read. You can also search for books and categorize them.
 
-## Install
+## Installation
 
-To get started developing right away:
+You need to have [Node](https://nodejs.org/en/download/) and [NPM](https://docs.npmjs.com/cli/install) to run the app.
+To install My Reads follow the following steps:
+ 1. Clone the repository `git clone https://github.com/caritosteph/MyReads.git`
+ 2. Install all project dependencies `npm install`
+ 3. Start the development server `npm start`
+ 4. Listen the server on http://localhost:3000
+ 
+## Frontend
+### Main Page
+- [X] The home page shows 3 shelves for books
+- [X] Main page show a control that allow users to move book between shelves.
+- [X] Using BookAPI.js file to keep data when refresh the page.
 
-* install all project dependencies with `npm install`
-* start the development server with `npm start`
+### Search page
+- [X] The search page has a search input field where the user types and the list of books is displayed on the page.
+- [x] Search results are allow to categorized each book “currently reading”, “want to read”, or “read”.
+- [x] The new categorize is show in the Main page.
 
-## Backend
+## Backend Server
 
 [`BooksAPI.js`](src/BooksAPI.js) contains the methods to perform necessary operations on the backend:
 
@@ -17,7 +30,8 @@ To get started developing right away:
 * `update` - returns a Promise which resolves to a JSON object containing the response data of the POST request.
 * `search` - returns a Promise which resolves to a JSON object containing a collection of a maximum of 20 book objects.
 
-## Extra features
+## More features
+- [X] Show more detail of each book
 
 ## License
 This project has [MIT](https://github.com/caritosteph/MyReads/blob/master/LICENSE) License
