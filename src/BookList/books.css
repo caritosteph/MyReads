@@ -37,5 +37,32 @@
 
  .card-actions {
    display: flex;
-   justify-content: space-between;
+   justify-content:  flex-end;
  }
+
+ /*
+  * Book Detail
+  */
+
+  .navbar-book-detail {
+    position: relative;
+  }
+
+  .btn-show-detail span{
+    color: #f44336;
+  }
+
+  .content-detail {
+    flex-grow: 1;
+    margin-top: 120px;
+    margin: 120px 20px;
+  }
+
+  .image-detail {
+    padding: 20px;
+    height: 440px;
+  }
+
+  .book-detail-description {
+    text-align: justify;
+  }

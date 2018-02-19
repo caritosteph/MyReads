@@ -10,7 +10,8 @@ import './app.css';
 class App extends React.Component {
   state = {
     bookList: [],
-    showAlert: false
+    showAlert: false,
+    showDetail: false
   }
 
   componentDidMount() {
@@ -83,7 +84,8 @@ class App extends React.Component {
      */
     this.setState({
       bookList: [],
-      showAlert: false
+      showAlert: false,
+      showDetail: false
     });
   }
 
@@ -102,7 +104,7 @@ class App extends React.Component {
                 currentlyReading={this.currentlyReading}
                 wantToRead={this.wantToRead}
                 read={this.read}
-                actionMenu={this.changeBookShelf} />
+                actionMenu={this.changeBookShelf}/>
             )}>
           </Route>
           <Route exact path="/search" render={() => (

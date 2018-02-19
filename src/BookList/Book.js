@@ -1,10 +1,11 @@
 
 import React from 'react';
-import Card, { CardHeader, CardMedia, CardContent } from 'material-ui/Card';
+import Card, { CardHeader, CardMedia, CardContent, CardActions } from 'material-ui/Card';
 import Avatar from 'material-ui/Avatar';
 import Typography from 'material-ui/Typography';
 import Grid from 'material-ui/Grid';
 import IconMenu from '../common/IconMenu'
+import BookDetail from './BookDetail';
 
 const Book = ({ book, actionMenu }) => {
   /*
@@ -34,6 +35,9 @@ const Book = ({ book, actionMenu }) => {
               <strong>Category:</strong> {book.categories ? book.categories : "General"}
             </Typography>
           </CardContent>
+          <CardActions className="card-actions" disableActionSpacing>
+            <BookDetail book={book}/>
+          </CardActions>
         </Card>
       </Grid>
     );
