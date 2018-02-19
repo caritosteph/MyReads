@@ -7,12 +7,9 @@ import Alert from './common/Alert';
 
 import './app.css';
 
-class BooksApp extends React.Component {
+class App extends React.Component {
   state = {
     bookList: [],
-    currentlyReading: [],
-    wantToRead: [],
-    read: [],
     showAlert: false
   }
 
@@ -20,17 +17,31 @@ class BooksApp extends React.Component {
     /*
      * TODO: Getting all books and showing in each shelf
      */
+      this.getAllBooks();
+  }
+
+  getAllBooks = () => {
     BooksAPI.getAll()
       .then( bookList => {
-          this.setState({
-            currentlyReading: bookList.filter(book => book.shelf === "currentlyReading"),
-            wantToRead: bookList.filter(book => book.shelf === "wantToRead"),
-            read: bookList.filter(book => book.shelf === "read")
-          });
+        this.setState({ bookList });
       })
       .catch( () => {
         this.resetValues()
       });
+  }
+
+  getBooksByShelf = () => {
+    const { bookList } = this.state;
+    this.currentlyReading = this.filterByShelf(bookList, "currentlyReading");
+    this.wantToRead = this.filterByShelf(bookList, "wantToRead");
+    this.read = this.filterByShelf(bookList, "read");
+  }
+
+  filterByShelf = (list, shelf) => {
+    /*
+     * TODO: Getting books by shelf
+     */
+    return list.filter(book => book.shelf === shelf);
   }
 
   changeBookShelf = (book, shelf) => {
@@ -38,30 +49,32 @@ class BooksApp extends React.Component {
      * TODO: Change books of one shelf to another and it's saved in the database
      */
     BooksAPI.update(book, shelf)
-      .then( result => {
-        BooksAPI.getAll()
-          .then( bookList => {
-              this.setState({ bookList: bookList});
-              BooksAPI.get(book.id)
-                .then( detail => {
-                  this.setState(state => ({
-                    currentlyReading: shelf === "currentlyReading" ? state.currentlyReading.concat(detail) : state.bookList.filter(book => result.currentlyReading.indexOf(book.id)>=0),
-                    wantToRead: shelf === "wantToRead" ? state.wantToRead.concat(detail) : state.bookList.filter(book => result.wantToRead.indexOf(book.id)>=0),
-                    read: shelf === "read" ? state.read.concat(detail) : state.bookList.filter(book => result.read.indexOf(book.id)>=0),
-                    showAlert: true
-                  }));
-                })
-                .catch( () => {
-                  this.resetValues()
-                });
-            })
-            .catch( () => {
-              this.resetValues()
-            });
+      .then( () => {
+          this.actionShelf(book, shelf);
       })
       .catch( () => {
         this.resetValues()
       });
+  }
+
+  actionShelf = (book, shelf) => {
+    /*
+     * TODO: Update if the book is already categorized or insert if it is a new book
+     */
+    this.setState(state => {
+      const actualBooksID = state.bookList.map(book => book.id);
+      const positionBook = actualBooksID.indexOf(book.id);
+      const isCategorized = positionBook > 0;
+
+      if(isCategorized) {
+        state.bookList[positionBook].shelf = shelf; // updating the book information
+      } else {
+        book.shelf = shelf; // updating the book information
+        state.bookList.push(book); // adding a book into the initial list
+      }
+      const bookList = state.bookList
+      return { bookList, showAlert: true};
+    });
   }
 
   resetValues = () => {
@@ -70,9 +83,7 @@ class BooksApp extends React.Component {
      */
     this.setState({
       bookList: [],
-      currentlyReading: [],
-      wantToRead: [],
-      read: []
+      showAlert: false
     });
   }
 
@@ -82,11 +93,15 @@ class BooksApp extends React.Component {
 
   render() {
 
+    this.getBooksByShelf();
+
     return (
         <div>
           <Route exact path="/" render={() => (
             <BookMain
-                {...this.state}
+                currentlyReading={this.currentlyReading}
+                wantToRead={this.wantToRead}
+                read={this.read}
                 actionMenu={this.changeBookShelf} />
             )}>
           </Route>
@@ -105,4 +120,4 @@ class BooksApp extends React.Component {
   }
 }
 
-export default BooksApp;
+export default App;

@@ -1,12 +1,9 @@
 
 import React from 'react';
-import Card, { CardHeader, CardMedia, CardContent, CardActions } from 'material-ui/Card';
+import Card, { CardHeader, CardMedia, CardContent } from 'material-ui/Card';
 import Avatar from 'material-ui/Avatar';
-import IconButton from 'material-ui/IconButton';
 import Typography from 'material-ui/Typography';
-import FavoriteIcon from 'material-ui-icons/Favorite';
 import Grid from 'material-ui/Grid';
-import Button from 'material-ui/Button';
 import IconMenu from '../common/IconMenu'
 
 const Book = ({ book, actionMenu }) => {
