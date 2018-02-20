@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import BookMain from './BookList/BookMain';
 import { Route } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI';
@@ -7,7 +7,7 @@ import Alert from './common/Alert';
 
 import './app.css';
 
-class App extends React.Component {
+class App extends Component {
   state = {
     bookList: [],
     showAlert: false,
