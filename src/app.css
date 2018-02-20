@@ -1,1 +1,18 @@
+/*
+ * App styles: AppBar
+ */
 
+ /* Header */
+
+.navbar-books {
+  width: 100%;
+}
+
+.flex-typography {
+  flex: 1;
+}
+
+.icon-search {
+  color: #fff!important;
+  flex: 1;
+}
