@@ -58,14 +58,12 @@ class BookSearch extends Component {
   }
 
   setBookShelf = (search, actualBooks) => {
+    const hashTable = {};
+    actualBooks.forEach( book => hashTable[book.id] = book.shelf);
     return search.map(book => {
-      for (var i = 0, arr = actualBooks.length; i < arr; i++) {
-        if(actualBooks[i].id === book.id) {
-          book.shelf = actualBooks[i].shelf;
-        }
-      }
+      book.shelf = hashTable[book.id] || 'none'
       return book;
-    })
+    });
   }
 
   render(){

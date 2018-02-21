@@ -64,11 +64,9 @@ class App extends Component {
      */
     this.setState(state => {
       const actualBooksID = state.bookList.map(book => book.id);
-      const positionBook = actualBooksID.indexOf(book.id);
-      const isCategorized = positionBook > 0;
-
+      const isCategorized = this.isCategorized(actualBooksID, book)
       if(isCategorized) {
-        state.bookList[positionBook].shelf = shelf; // updating the book information
+        state.bookList[isCategorized].shelf = shelf; // updating the book information
       } else {
         book.shelf = shelf; // updating the book information
         state.bookList.push(book); // adding a book into the initial list
@@ -76,6 +74,11 @@ class App extends Component {
       const bookList = state.bookList
       return { bookList, showAlert: true};
     });
+  }
+
+  isCategorized = (booksID, book) => {
+    const positionBook = booksID.indexOf(book.id);
+    return positionBook > 0 ? positionBook : 0;
   }
 
   resetValues = () => {
