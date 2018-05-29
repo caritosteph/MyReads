@@ -12,6 +12,8 @@ To install My Reads follow the following steps:
  4. Listen the server on http://localhost:3000
  
 ## Frontend
+This project is using **ReactJS**
+
 ### Main Page
 - [X] The home page shows 3 shelves for books
 - [X] Main page show a control that allow users to move book between shelves.
